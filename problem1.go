@@ -1,56 +1,25 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	var input string
-	var scores []int
+	var n int
+	fmt.Print("Masukkan jumlah baris segitiga: ")
+	fmt.Scanln(&n)
 
-	fmt.Println("Masukkan skor siswa :")
-	_, err := fmt.Scanln(&input)
-	if err != nil {
-		fmt.Println("Error membaca input:", err)
-		return
-	}
+	segitiga := make([][]string, n)
 
-	if input == "" {
-		fmt.Println("Input tidak boleh kosong.")
-		return
-	}
-
-	parts := strings.Split(input, " ")
-	for _, part := range parts {
-		score, err := strconv.Atoi(part)
-		if err != nil {
-			fmt.Println("Input tidak valid:", part)
-			continue
+	for i := 0; i < n; i++ {
+		segitiga[i] = make([]string, i+1)
+		for j := 0; j < i+1; j++ {
+			segitiga[i][j] = "*"
 		}
-		scores = append(scores, score)
 	}
 
-	for _, score := range scores {
-		grade := tentukanNilai(score)
-		fmt.Printf("Skor: %d, Nilai: %s\n", score, grade)
-	}
-}
-
-func tentukanNilai(score int) string {
-	switch {
-	case score >= 80 && score <= 100:
-		return "A"
-	case score >= 65 && score <= 79:
-		return "B+"
-	case score >= 50 && score <= 64:
-		return "B"
-	case score >= 35 && score <= 49:
-		return "C"
-	case score >= 0 && score <= 34:
-		return "E"
-	default:
-		return "Skor Tidak Valid"
+	for i := 0; i < n; i++ {
+		for j := 0; j < i+1; j++ {
+			fmt.Print(segitiga[i][j] + " ")
+		}
+		fmt.Println()
 	}
 }
