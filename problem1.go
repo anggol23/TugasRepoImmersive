@@ -1,25 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+func Compare(a, b string) string {
+	if len(a) > len(b) {
+		a, b = b, a
+	}
+
+	longestCommonSubstring := ""
+	aLen := len(a)
+
+	for length := aLen; length > 0; length-- {
+		for i := 0; i <= aLen-length; i++ {
+			substr := a[i : i+length]
+			if strings.Contains(b, substr) {
+				return substr
+			}
+		}
+	}
+
+	return longestCommonSubstring
+}
 
 func main() {
-	var n int
-	fmt.Print("Masukkan jumlah baris segitiga: ")
-	fmt.Scanln(&n)
-
-	segitiga := make([][]string, n)
-
-	for i := 0; i < n; i++ {
-		segitiga[i] = make([]string, i+1)
-		for j := 0; j < i+1; j++ {
-			segitiga[i][j] = "*"
-		}
-	}
-
-	for i := 0; i < n; i++ {
-		for j := 0; j < i+1; j++ {
-			fmt.Print(segitiga[i][j] + " ")
-		}
-		fmt.Println()
-	}
+	fmt.Println(Compare("AKA", "AKASHI"))
+	fmt.Println(Compare("KANGOORO", "KANG"))
+	fmt.Println(Compare("KI", "KIJANG"))
+	fmt.Println(Compare("KUPU-KUPU", "KUPU"))
+	fmt.Println(Compare("ILALANG", "ILA"))
 }
