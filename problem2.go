@@ -4,25 +4,35 @@ import (
 	"fmt"
 )
 
-func caesar(offset int, input string) string {
-	shifted := make([]rune, len(input))
-	offset = offset % 26
+func getMinMax(a1, a2, a3, a4, a5, a6 int) (min int, max int) {
+	numbers := []int{a1, a2, a3, a4, a5, a6}
+	min = numbers[0]
+	max = numbers[0]
 
-	for i, char := range input {
-		if char >= 'a' && char <= 'z' {
-			shifted[i] = 'a' + (char-'a'+rune(offset))%26
-		} else {
-			shifted[i] = char
+	for _, num := range numbers {
+		if num < min {
+			min = num
+		}
+		if num > max {
+			max = num
 		}
 	}
-
-	return string(shifted)
+	return
 }
 
 func main() {
-	fmt.Println(caesar(3, "abc"))
-	fmt.Println(caesar(2, "alta"))
-	fmt.Println(caesar(10, "siterraacademy"))
-	fmt.Println(caesar(1, "abcdefghijklmnopqrstuvwxyz"))
-	fmt.Println(caesar(1000, "abcdefghijklmnopqrstuvwxyz"))
+	var a1, a2, a3, a4, a5, a6 int
+
+	fmt.Println("Enter 6 numbers:")
+	fmt.Scan(&a1)
+	fmt.Scan(&a2)
+	fmt.Scan(&a3)
+	fmt.Scan(&a4)
+	fmt.Scan(&a5)
+	fmt.Scan(&a6)
+
+	min, max := getMinMax(a1, a2, a3, a4, a5, a6)
+
+	fmt.Printf("%d is the maximum number\n", max)
+	fmt.Printf("%d is the minimum number\n", min)
 }

@@ -4,26 +4,36 @@ import (
 	"fmt"
 )
 
-func ArrayUnique(arrayA, arrayB []int) []int {
-	mapB := make(map[int]bool)
-	for _, val := range arrayB {
-		mapB[val] = true
+func getMinMax(numbers ...int) (min int, max int) {
+	if len(numbers) == 0 {
+		return 0, 0
 	}
-
-	var result []int
-	for _, val := range arrayA {
-		if !mapB[val] {
-			result = append(result, val)
+	min = numbers[0]
+	max = numbers[0]
+	for _, num := range numbers {
+		if num < min {
+			min = num
+		}
+		if num > max {
+			max = num
 		}
 	}
-
-	return result
+	return
 }
 
 func main() {
-	fmt.Println(ArrayUnique([]int{1, 2, 3, 4}, []int{1, 3, 5, 10, 16}))
-	fmt.Println(ArrayUnique([]int{10, 20, 30, 40}, []int{5, 10, 15, 50}))
-	fmt.Println(ArrayUnique([]int{1, 3, 7}, []int{1, 3, 5}))
-	fmt.Println(ArrayUnique([]int{3, 8}, []int{2, 8}))
-	fmt.Println(ArrayUnique([]int{1, 2, 3}, []int{3, 2, 1}))
+	var a1, a2, a3, a4, a5, a6 int
+
+	fmt.Println("Enter 6 numbers:")
+	fmt.Scan(&a1)
+	fmt.Scan(&a2)
+	fmt.Scan(&a3)
+	fmt.Scan(&a4)
+	fmt.Scan(&a5)
+	fmt.Scan(&a6)
+
+	min, max := getMinMax(a1, a2, a3, a4, a5, a6)
+
+	fmt.Printf("%d is the maximum number\n", max)
+	fmt.Printf("%d is the minimum number\n", min)
 }
